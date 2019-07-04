@@ -67,7 +67,7 @@ fi
 
 if [ $DB -eq 0 ]
 then
-mysql --defaults-file=.my.cnf ${DB_NAME} -h 127.0.0.1 --port=3324 < startup/wordpress.sql
+  mysql --defaults-file=.my.cnf ${DB_NAME} -h 127.0.0.1 --port=3324 < startup/wordpress.sql
 fi
 
 echo "Running at: ${WP_WEB_SCHEME}://${WP_WEB_DOMAIN}:${WP_WEB_PORT}"

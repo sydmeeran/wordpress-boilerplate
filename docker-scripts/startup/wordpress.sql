@@ -17,8 +17,6 @@
 
 SET sql_mode='NO_AUTO_VALUE_ON_ZERO';
 
-
-
 #
 # Delete any existing table `wp_commentmeta`
 #

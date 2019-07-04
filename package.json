@@ -4,7 +4,7 @@
   "description": "Boilerplate for headless wordpress sites.",
   "main": "index.js",
   "scripts": {
-    "dev:wordpress": "sh onstart.sh",
+    "dev:wordpress": "sh start.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

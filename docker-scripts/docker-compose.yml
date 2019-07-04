@@ -8,9 +8,9 @@ services:
     environment:
       - VIRTUAL_HOST=${WP_WEB_DOMAIN}
       - DB_HOST=db
-      - DB_USER=root
-      - DB_PASSWORD=password
-      - DB_NAME=wordpress
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
       - DOCKER=true
     expose:
       - 80
