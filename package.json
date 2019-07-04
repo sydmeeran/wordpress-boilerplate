@@ -1,0 +1,21 @@
+{
+  "name": "wordpress-boilerplate",
+  "version": "1.0.0",
+  "description": "Boilerplate for headless wordpress sites.",
+  "main": "index.js",
+  "scripts": {
+    "dev:wordpress": "sh onstart.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mbekhet/wordpress-boilerplate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mbekhet/wordpress-boilerplate/issues"
+  },
+  "homepage": "https://github.com/mbekhet/wordpress-boilerplate#readme"
+}

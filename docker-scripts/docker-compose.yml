@@ -1,0 +1,40 @@
+version: "3.3"
+
+services:
+  web:
+    image: nimmis/apache-php7
+    links:
+      - db:mysql
+    environment:
+      - VIRTUAL_HOST=${WP_WEB_DOMAIN}
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=password
+      - DB_NAME=wordpress
+      - DOCKER=true
+    expose:
+      - 80
+    volumes:
+      - type: bind
+        source: ../content
+        target: /var/www/html
+    container_name: ${PROJECT_NAME}_web
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_PORT=3324
+    restart: always
+    ports:
+      - "127.0.0.1:3324:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    container_name: ${PROJECT_NAME}_db
+volumes:
+  db-data:
+
+networks:
+  default:
+    external:
+      name: nginx-proxy

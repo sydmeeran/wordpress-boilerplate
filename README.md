@@ -1,2 +1,4 @@
 # wordpress-boilerplate
-Boilerplate for wordpress sites.
+Boilerplate for headless wordpress sites.
+
+Uses Next JS for the front-end.
