@@ -18,27 +18,25 @@
  * @package WordPress
  */
 
-require_once(dirname(__FILE__) . '/vendor/autoload.php');
+require_once dirname(__FILE__) . '/vendor/autoload.php';
 
-
-$dotenv = new Dotenv\Dotenv( dirname(__FILE__) );
-if (file_exists( dirname(__FILE__) . '/.env' )) {
-  $dotenv->load();
-  $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD', 'DB_HOST', 'WP_HOME', 'WP_SITEURL']);
+$dotenv = new Dotenv\Dotenv(dirname(__FILE__));
+if (file_exists(dirname(__FILE__) . '/.env')) {
+    $dotenv->load();
+    $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD', 'DB_HOST', 'WP_HOME', 'WP_SITEURL']);
 }
 
-
-if ( function_exists( 'flush_rewrite_rules' ) ) {
-  flush_rewrite_rules();
+if (function_exists('flush_rewrite_rules')) {
+    flush_rewrite_rules();
 }
 
 if (getenv('WP_THEME')) {
-  define( 'WP_DEFAULT_THEME', getenv('WP_THEME') );
+    define('WP_DEFAULT_THEME', getenv('WP_THEME'));
 }
 
 // fix for too many redirects
-if ( getenv('ENABLE_HTTPS') ) {
-  $_SERVER['HTTPS'] = 'on';
+if (getenv('ENABLE_HTTPS')) {
+    $_SERVER['HTTPS'] = 'on';
 }
 
 // ** MySQL settings - You can get this info from your web host ** //
@@ -67,7 +65,7 @@ define('WP_SITEURL', getenv('WP_SITEURL'));
 /** Custom WP directories */
 // define('ADMIN_DIR', '/wp/wp-admin');
 define('CONTENT_DIR', '/wp-content');
-define('WP_CONTENT_DIR', dirname( __FILE__ ) . CONTENT_DIR);
+define('WP_CONTENT_DIR', dirname(__FILE__) . CONTENT_DIR);
 define('WP_CONTENT_URL', WP_HOME . CONTENT_DIR);
 define('WP_THEME_DIR', WP_CONTENT_DIR . '/' . 'themes' . '/' . getenv('WP_THEME'));
 
@@ -80,10 +78,9 @@ define('WP_AUTO_UPDATE_CORE', false);
 define('DISALLOW_FILE_MODS', true);
 
 /** Disable file editing */
-define('DISALLOW_FILE_EDIT', true );
+define('DISALLOW_FILE_EDIT', true);
 
-define ('WP_TRANSIENTS', true);
-
+define('WP_TRANSIENTS', true);
 
 /**
  * For developers: WordPress debugging mode.
@@ -98,16 +95,16 @@ define ('WP_TRANSIENTS', true);
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
 
-if ( ! getenv('WP_DEBUG') ) {
-  ini_set('display_errors','on');
-  ini_set('error_reporting', E_ALL );
+if (!getenv('WP_DEBUG')) {
+    ini_set('display_errors', 'on');
+    ini_set('error_reporting', E_ALL);
 }
 
 define('WP_DEBUG', getenv('WP_DEBUG') === 'true');
 define('WP_DEBUG_DISPLAY', getenv('WP_DEBUG_DISPLAY') === 'true');
 define('WP_DEBUG_LOG', getenv('WP_DEBUG_LOG') === 'true');
 
-define('GRAPHQL_DEBUG', TRUE);
+define('GRAPHQL_DEBUG', true);
 
 // frontend url for headless
 define('FRONTEND_URL', getenv('FRONTEND_URL'));
@@ -117,14 +114,14 @@ define('INCLUDE_GTM', getenv('INCLUDE_GTM') === 'true');
 
 define('GOOGLE_MAPS_API_KEY', getenv('GOOGLE_MAPS_API_KEY'));
 
-define( 'AS3CF_SETTINGS', serialize( array(
-  'provider' => 'aws',
-  'access-key-id' => getenv('AWS_ACCESS_KEY_ID'),
-  'secret-access-key' => getenv('AWS_SECRET_ACCESS_KEY'),
-) ) );
+define('AS3CF_SETTINGS', serialize(array(
+    'provider' => 'aws',
+    'access-key-id' => getenv('AWS_ACCESS_KEY_ID'),
+    'secret-access-key' => getenv('AWS_SECRET_ACCESS_KEY'),
+)));
 
-define( 'DBI_AWS_ACCESS_KEY_ID', getenv('AWS_ACCESS_KEY_ID') );
-define( 'DBI_AWS_SECRET_ACCESS_KEY', getenv('AWS_SECRET_ACCESS_KEY') );
+define('DBI_AWS_ACCESS_KEY_ID', getenv('AWS_ACCESS_KEY_ID'));
+define('DBI_AWS_SECRET_ACCESS_KEY', getenv('AWS_SECRET_ACCESS_KEY'));
 
 define('COM_AWS_CF_DISTRIBUTION_ID_BACKEND', getenv('MFW_CF_BACKEND'));
 define('COM_AWS_CF_DISTRIBUTION_ID_FRONTEND', getenv('MFW_CF_FRONTEND'));
@@ -138,15 +135,15 @@ define('COM_AWS_CF_DISTRIBUTION_ID_FRONTEND', getenv('MFW_CF_FRONTEND'));
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',          '=p;00*gdSEX;CZS;ihdJ+:YO:JZvnv;^Nb1{91~q,P*;+d#Uaq)Be:di+*{2x95l' );
-define( 'SECURE_AUTH_KEY',   'fMMp=h0%6<+q,?[^u-(b0@u)5t>ebXO>IFr_sCt3NOL,+$nT2H$RjbwXh,3xqI]7' );
-define( 'LOGGED_IN_KEY',     '&%,/z.<pV:;7?]zeB(AiH&u1Zo#SL~5jycws$!3q.tAjma*C8cJcA8+mWyOg},qk' );
-define( 'NONCE_KEY',         ')4t?P3qVBoP:tI^*D/<.)H4#Wll>|rsABs@A;w$jd=g;?W]=KrWEm&CYp,JRaB^o' );
-define( 'AUTH_SALT',         'O4zBT>**NBf&@c3q@[%L31Ip({aFpu/gjA#Z{2{ 0XGA[.WQ.9*^@f]$YKJfYM0a' );
-define( 'SECURE_AUTH_SALT',  'gL<p_m}ZU~f^P$^7y]*3Xl3fCYcI/?wQ;H5;JmKS#:mgb:e)V~~0,_jAL^qRlrsG' );
-define( 'LOGGED_IN_SALT',    '@jnammMETvqI/qD;Ce.RLBfZk+i ]8s;Zm4BWNGG8WQ2+o5Vr|afz^Jz*zPiqEQ)' );
-define( 'NONCE_SALT',        'w~_sd~9$Pjbg?cH.0[C!Q2t(B9u8(!Xm)p>9ZDz~%txC=(qjj78z5xA ,8;o^M_m' );
-define( 'WP_CACHE_KEY_SALT', 'ODJP|, pn(e3~B,cGmk4(7vT7<T|(h8ufQdiaB$f_Xi$Z].96+0QjqtXTPrF2ly?' );
+define('AUTH_KEY', '=p;00*gdSEX;CZS;ihdJ+:YO:JZvnv;^Nb1{91~q,P*;+d#Uaq)Be:di+*{2x95l');
+define('SECURE_AUTH_KEY', 'fMMp=h0%6<+q,?[^u-(b0@u)5t>ebXO>IFr_sCt3NOL,+$nT2H$RjbwXh,3xqI]7');
+define('LOGGED_IN_KEY', '&%,/z.<pV:;7?]zeB(AiH&u1Zo#SL~5jycws$!3q.tAjma*C8cJcA8+mWyOg},qk');
+define('NONCE_KEY', ')4t?P3qVBoP:tI^*D/<.)H4#Wll>|rsABs@A;w$jd=g;?W]=KrWEm&CYp,JRaB^o');
+define('AUTH_SALT', 'O4zBT>**NBf&@c3q@[%L31Ip({aFpu/gjA#Z{2{ 0XGA[.WQ.9*^@f]$YKJfYM0a');
+define('SECURE_AUTH_SALT', 'gL<p_m}ZU~f^P$^7y]*3Xl3fCYcI/?wQ;H5;JmKS#:mgb:e)V~~0,_jAL^qRlrsG');
+define('LOGGED_IN_SALT', '@jnammMETvqI/qD;Ce.RLBfZk+i ]8s;Zm4BWNGG8WQ2+o5Vr|afz^Jz*zPiqEQ)');
+define('NONCE_SALT', 'w~_sd~9$Pjbg?cH.0[C!Q2t(B9u8(!Xm)p>9ZDz~%txC=(qjj78z5xA ,8;o^M_m');
+define('WP_CACHE_KEY_SALT', 'ODJP|, pn(e3~B,cGmk4(7vT7<T|(h8ufQdiaB$f_Xi$Z].96+0QjqtXTPrF2ly?');
 
 /**
  * WordPress Database Table prefix.
@@ -159,11 +156,9 @@ $table_prefix = 'wp_';
 /* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */
-if ( ! defined( 'ABSPATH' ) )
-  define( 'ABSPATH', dirname( __FILE__ ) . '/' );
+if (!defined('ABSPATH')) {
+    define('ABSPATH', dirname(__FILE__) . '/');
+}
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
-
-
-

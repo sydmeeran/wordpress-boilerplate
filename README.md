@@ -3,6 +3,7 @@
 Base Template
 
 ---
+
 # WordPress installation & set up
 
 Run the following command (Requires docker and mysql to be installed and running)
