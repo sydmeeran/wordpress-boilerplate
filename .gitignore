@@ -1,4 +1,3 @@
-
 *.log
 
 content/wp-content/advanced-cache.php
@@ -24,3 +23,5 @@ vendor
 tmp
 
 .env
+
+*-docker-scripts

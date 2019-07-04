@@ -33,7 +33,7 @@ docker-compose build
 docker-compose up -d
 
 #
-sleep 3
+# sleep 10
 
 FILE=.my.cnf
 
@@ -44,7 +44,26 @@ password=${DB_PASSWORD}
 EOM
 
 # now that we have a db up, lets intialise it
-DB=$(mysql --defaults-file=.my.cnf ${DB_NAME} -h 127.0.0.1 --port=3324 -e "show tables;" | wc -c)
+
+COUNT=0
+SKIP=0
+
+while ! mysql --defaults-file=.my.cnf ${DB_NAME} -h 127.0.0.1 --port=3324 -e "show tables;" ; do
+    echo "Error connecting, sleeping for 5 seconds then retrying"
+
+    if [ $COUNT -eq 10 ]
+    then
+        SKIP=1
+        break;
+    fi
+    COUNT=$((COUNT + 1))
+    sleep 5
+done
+
+if [ $SKIP -eq 0 ]
+then
+    DB=$(mysql --defaults-file=.my.cnf ${DB_NAME} -h 127.0.0.1 --port=3324 -e "show tables;" | wc -c);
+fi
 
 if [ $DB -eq 0 ]
 then
