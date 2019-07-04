@@ -1,5 +1,6 @@
 *.log
 
+content/auth.json
 content/wp-content/advanced-cache.php
 content/wp-content/backup-db/
 content/wp-content/backups/
