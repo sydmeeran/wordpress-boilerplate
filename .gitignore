@@ -24,6 +24,8 @@ vendor
 tmp
 
 .env
+.DS_Store
 
 *-docker-scripts
+
 node_modules
