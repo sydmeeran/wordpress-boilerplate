@@ -69,6 +69,8 @@ define('WP_SITEURL', getenv('WP_SITEURL'));
 define('CONTENT_DIR', '/wp-content');
 define('WP_CONTENT_DIR', dirname( __FILE__ ) . CONTENT_DIR);
 define('WP_CONTENT_URL', WP_HOME . CONTENT_DIR);
+define('WP_THEME_DIR', WP_CONTENT_DIR . '/' . 'themes' . '/' . getenv('WP_THEME'));
+
 // define('WP_ADMIN_DIR', dirname(__FILE__) . ADMIN_DIR);
 
 /** Disable WP automatic updates. Updates will be controlled via build/deployment process */
