@@ -1,6 +1,6 @@
 <?php
 
-class CustomPostType {
+class PostType {
   private $_slug = 'custom_type';
   private $_name = 'Custom Type';
   private $_namePlural = 'Custom Types';
