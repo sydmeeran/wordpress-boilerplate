@@ -22,12 +22,10 @@ $restApi->registerGet('/test', 'site_test_callback');
 add_action('rest_api_init', function() {
   remove_filter('rest_pre_serve_request', 'rest_send_cors_headers');
   add_filter('rest_pre_serve_request', function($value) {
-    if ( $origin) {  
-      header( 'Access-Control-Allow-Origin: ' . '*' );
-      header( 'Access-Control-Allow-Credentials: true' );
-      header( 'Access-Control-Allow-Headers: Authorization, X-WP-Nonce, Content-Type, Accept' );
-      header( 'Vary: Origin' );
-    }       
+    header( 'Access-Control-Allow-Origin: ' . '*' );
+    header( 'Access-Control-Allow-Credentials: true' );
+    header( 'Access-Control-Allow-Headers: Authorization, X-WP-Nonce, Content-Type, Accept' );
+    header( 'Vary: Origin' );
     return $value;
   });
 }, 15);
