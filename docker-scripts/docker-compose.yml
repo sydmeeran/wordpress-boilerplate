@@ -19,10 +19,10 @@ services:
         source: ../content
         target: /var/www/html
       - type: bind
-        source: ../apache2/apache2.conf
+        source: ./apache2/apache2.conf
         target: /etc/apache2/apache2.conf
       - type: bind
-        source: ../apache2/mods-enabled
+        source: ./apache2/mods-enabled
         target: /etc/apache2/mods-enabled
     container_name: ${PROJECT_NAME}_web
   db:

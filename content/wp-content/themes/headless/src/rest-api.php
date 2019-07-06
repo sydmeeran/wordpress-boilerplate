@@ -15,8 +15,10 @@ class RestApi {
   }
 
   public function ensureAcf($data, $maxDepth = 15, $depth = 0) {
-    if ($depth > $maxDepth) return;
-  
+    if ($depth > $maxDepth) {
+      return;
+    }
+
     if (is_array($data)) {
       foreach ($data as $index => $item) {
         if ($item instanceof stdClass || $item instanceof WP_Post) {
@@ -27,17 +29,17 @@ class RestApi {
         }
       }
     }
-  
+
     $newDepth = $depth + 1;
     foreach ($data as $index => $item) {
       if (is_array($item)) {
         $data[$index] = $this->ensureAcf($item, $maxDepth, $newDepth);
       }
     }
-  
+
     return $data;
   }
-  
+
   public function getPosts(WP_REST_Request $request) {
     $post_info = $this->_getPostType($request);
     return $this->_prepareRestResponse($this->_query($post_info), 200);
@@ -54,18 +56,19 @@ class RestApi {
 
     if ($single) {
       $query_args += [
-        'name' => $post_info['slug']
+        'name' => $post_info['slug'],
       ];
     }
 
     $transient_result = false;
 
     if ($single) {
-      if (WP_TRANSIENTS)
+      if (WP_TRANSIENTS) {
         $transient_result = get_transient($post_info['post_type'] . '_' . $post_info['slug']);
+      }
 
       if ($transient_result) {
-        $posts = $this->ensureAcf($transient_result);  
+        $posts = $this->ensureAcf($transient_result);
       } else {
         $query = get_posts($query_args);
         $posts = $this->ensureAcf($query);
@@ -74,12 +77,12 @@ class RestApi {
           set_transient($post_info['post_type'] . '_' . $post_info['slug'], $query, 86400);
         }
       }
-      
+
       return count($posts) === 1 ? $posts[0] : false;
-    }
-    else {
-      if (WP_TRANSIENTS)
+    } else {
+      if (WP_TRANSIENTS) {
         $transient_result = get_transient($post_info['post_type']);
+      }
 
       if ($transient_result) {
         $posts = $this->ensureAcf($transient_result);
@@ -103,20 +106,20 @@ class RestApi {
     $uri_parts = explode('/', $request_url);
 
     if (count($uri_parts) === 5) { // individual post type
-      return [ 'post_type' => $uri_parts[count($uri_parts) - 1], 'slug' => false ];
+      return ['post_type' => $uri_parts[count($uri_parts) - 1], 'slug' => false];
     } else if (count($uri_parts === 6)) { // in a listing page
-      return [ 'post_type' => $uri_parts[count($uri_parts) - 2], 'slug' => $uri_parts[count($uri_parts) - 1] ];
+      return ['post_type' => $uri_parts[count($uri_parts) - 2], 'slug' => $uri_parts[count($uri_parts) - 1]];
     }
   }
 
-  private function _registerEndpoint($method, $endpoint , $callback) {
-    if ( strpos( $endpoint, '/') !== 0) {
-      $endpoint = '/'.$endpoint;
+  private function _registerEndpoint($method, $endpoint, $callback) {
+    if (strpos($endpoint, '/') !== 0) {
+      $endpoint = '/' . $endpoint;
     }
 
     add_action('rest_api_init', function () use ($method, $endpoint, $callback) {
       register_rest_route($this->_namespace . '/' . $this->_version, $endpoint, [
-        'methods'  => [$method, 'OPTIONS'],
+        'methods' => [$method, 'OPTIONS'],
         'callback' => $callback,
       ]);
     });
@@ -128,15 +131,15 @@ class RestApi {
     ]);
 
     foreach ($post_types as $index => $post_type) {
-      $this->registerGet($post_type, [ $this, 'getPosts' ]);
-      $this->registerGet($post_type . '/' .'(?P<slug>\S+)' . '/', [ $this, 'getPosts' ]);
+      $this->registerGet($post_type, [$this, 'getPosts']);
+      $this->registerGet($post_type . '/' . '(?P<slug>\S+)' . '/', [$this, 'getPosts']);
 
       // transient management
-      add_action('save_post_' . $post_type, function ( $post_id ) use ($post_type) {
+      add_action('save_post_' . $post_type, function ($post_id) use ($post_type) {
         $post = get_post($post_id);
         $delete = false;
 
-        if ( 'trash' === $post->post_status ) {
+        if ('trash' === $post->post_status) {
           $delete = true;
         }
 
@@ -153,11 +156,11 @@ class RestApi {
           if ($delete) {
             $originalSlug = explode('_', $post->post_name)[0];
 
-            delete_transient($post_type .'_' . $originalSlug);
+            delete_transient($post_type . '_' . $originalSlug);
           } else {
-            set_transient($post_type .'_' . $post->post_name, [$post], 86400);
+            set_transient($post_type . '_' . $post->post_name, [$post], 86400);
           }
-        } 
+        }
       });
     }
   }
@@ -173,21 +176,19 @@ class RestApi {
   private function _prepareRestResponse($retData = false, $code = 200) {
     $response = false;
     switch ($code) {
-      case 200:
-        $response = new WP_REST_Response([
-          'error' => false,
-          'data' => $retData,
-        ], $code);
-        break;
-      default: 
-        $response = new WP_REST_Response([
-          'error' => false,
-          'data' => $retData,
-        ], $code);
-        break;
+    case 200:
+      $response = new WP_REST_Response([
+        'error' => false,
+        'data' => $retData,
+      ], $code);
+      break;
+    default:
+      $response = new WP_REST_Response([
+        'error' => false,
+        'data' => $retData,
+      ], $code);
+      break;
     }
     return $response;
   }
 }
-
-

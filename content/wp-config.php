@@ -22,21 +22,21 @@ require_once dirname(__FILE__) . '/vendor/autoload.php';
 
 $dotenv = new Dotenv\Dotenv(dirname(__FILE__));
 if (file_exists(dirname(__FILE__) . '/.env')) {
-    $dotenv->load();
-    $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD', 'DB_HOST', 'WP_HOME', 'WP_SITEURL']);
+  $dotenv->load();
+  $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD', 'DB_HOST', 'WP_HOME', 'WP_SITEURL']);
 }
 
 if (function_exists('flush_rewrite_rules')) {
-    flush_rewrite_rules();
+  flush_rewrite_rules();
 }
 
 if (getenv('WP_THEME')) {
-    define('WP_DEFAULT_THEME', getenv('WP_THEME'));
+  define('WP_DEFAULT_THEME', getenv('WP_THEME'));
 }
 
 // fix for too many redirects
 if (getenv('ENABLE_HTTPS')) {
-    $_SERVER['HTTPS'] = 'on';
+  $_SERVER['HTTPS'] = 'on';
 }
 
 // ** MySQL settings - You can get this info from your web host ** //
@@ -96,8 +96,8 @@ define('WP_TRANSIENTS', true);
  */
 
 if (!getenv('WP_DEBUG')) {
-    ini_set('display_errors', 'on');
-    ini_set('error_reporting', E_ALL);
+  ini_set('display_errors', 'on');
+  ini_set('error_reporting', E_ALL);
 }
 
 define('WP_DEBUG', getenv('WP_DEBUG') === 'true');
@@ -115,9 +115,9 @@ define('INCLUDE_GTM', getenv('INCLUDE_GTM') === 'true');
 define('GOOGLE_MAPS_API_KEY', getenv('GOOGLE_MAPS_API_KEY'));
 
 define('AS3CF_SETTINGS', serialize(array(
-    'provider' => 'aws',
-    'access-key-id' => getenv('AWS_ACCESS_KEY_ID'),
-    'secret-access-key' => getenv('AWS_SECRET_ACCESS_KEY'),
+  'provider' => 'aws',
+  'access-key-id' => getenv('AWS_ACCESS_KEY_ID'),
+  'secret-access-key' => getenv('AWS_SECRET_ACCESS_KEY'),
 )));
 
 define('DBI_AWS_ACCESS_KEY_ID', getenv('AWS_ACCESS_KEY_ID'));
@@ -157,7 +157,7 @@ $table_prefix = 'wp_';
 
 /** Absolute path to the WordPress directory. */
 if (!defined('ABSPATH')) {
-    define('ABSPATH', dirname(__FILE__) . '/');
+  define('ABSPATH', dirname(__FILE__) . '/');
 }
 
 /** Sets up WordPress vars and included files. */

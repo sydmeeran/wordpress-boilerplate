@@ -5,8 +5,8 @@ class PostType {
   private $_name = 'Custom Type';
   private $_namePlural = 'Custom Types';
   private $_isPublic = true;
-  private $_hierarchical = false;  
-  private $_supports = [ 'title', 'author', 'thumbnail', 'excerpt', 'revisions' ];
+  private $_hierarchical = false;
+  private $_supports = ['title', 'author', 'thumbnail', 'excerpt', 'revisions'];
   private $_isRest = true;
   private $_dashIcon = false;
   private $_withFront = true;
@@ -24,7 +24,7 @@ class PostType {
   }
 
   private function _getArg($args, $item, $default) {
-    return isset( $args[$item] ) && $args[$item] ? $args[$item] : $default;
+    return isset($args[$item]) && $args[$item] ? $args[$item] : $default;
   }
 
   public function setArgs($args) {
@@ -32,17 +32,17 @@ class PostType {
   }
 
   public function build() {
-    register_post_type( $this->_slug,
+    register_post_type($this->_slug,
       array(
         'labels' => array(
-          'name' => __( $this->_namePlural ),
-          'singular_name' => __( $this->_name ),
-          'edit_item' => __( 'Edit ' . $this->_name ),
-          'add_new_item' => __( 'Add New ' . $this->_name ),
-          'new_item' => __( 'New ' . $this->_name ),
-          'view_item' => __( 'View ' . $this->_name ),
-          'view_items' => __( 'View ' . $this->_namePlural ),
-          'search_items' => __( $this->_name ),
+          'name' => __($this->_namePlural),
+          'singular_name' => __($this->_name),
+          'edit_item' => __('Edit ' . $this->_name),
+          'add_new_item' => __('Add New ' . $this->_name),
+          'new_item' => __('New ' . $this->_name),
+          'view_item' => __('View ' . $this->_name),
+          'view_items' => __('View ' . $this->_namePlural),
+          'search_items' => __($this->_name),
         ),
         'public' => $this->_isPublic,
         'hierarchical' => $this->_hierarchical,
@@ -54,12 +54,11 @@ class PostType {
         ),
         'show_in_rest' => true,
         'show_in_nav_menus' => true,
-        'menu_icon' => $this->_dashIcon,       
+        'menu_icon' => $this->_dashIcon,
       )
     );
   }
 }
-
 
 class DashIcons {
   public static $icons = [
