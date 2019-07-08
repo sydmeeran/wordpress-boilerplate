@@ -1,0 +1,60 @@
+.o-layout--third {
+  margin-left: -$inuit-global-spacing-unit*2/3;
+  > .o-layout__item {
+    padding-left: $inuit-global-spacing-unit*2/3;
+  }
+}
+
+.o-layout--large\@palm {
+  @include mq(palm) {
+    margin-left: -$inuit-global-spacing-unit-large;
+
+    > .o-layout__item {
+      padding-left: $inuit-global-spacing-unit-large;
+    }
+  }
+}
+
+.o-layout--large\@tablet {
+  @include mq(tablet) {
+    margin-left: -$inuit-global-spacing-unit-large;
+
+    > .o-layout__item {
+      padding-left: $inuit-global-spacing-unit-large;
+    }
+  }
+}
+
+
+.o-layout--huge\@tablet {
+  @include mq(tablet) {
+
+    margin-left: -$inuit-global-spacing-unit-huge;
+
+    > .o-layout__item {
+      padding-left: $inuit-global-spacing-unit-huge;
+    }
+  }
+}
+
+.o-layout--huge\@desktop {
+  @include mq(desktop) {
+
+    margin-left: -$inuit-global-spacing-unit-huge;
+
+    > .o-layout__item {
+      padding-left: $inuit-global-spacing-unit-huge;
+    }
+  }
+}
+
+.o-layout--xxhuge\@wide {
+  @include mq(wide) {
+
+    margin-left: -$inuit-global-spacing-unit-huge*2;
+
+    > .o-layout__item {
+      padding-left: $inuit-global-spacing-unit-huge*2;
+    }
+  }
+}

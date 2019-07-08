@@ -5,6 +5,7 @@ then
 fi
 
 cp .env content/.env
+cp .env app/.env
 cp .env docker-scripts/.env
 
 cd content
@@ -13,4 +14,7 @@ cd ..
 cd docker-scripts
 sh run.sh
 
-# update the wordpress.sql file to the domain set in the .env file
+# run the next app
+cd ..
+cd app
+yarn && yarn dev

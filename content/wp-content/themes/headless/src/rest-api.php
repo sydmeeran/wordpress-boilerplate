@@ -42,7 +42,13 @@ class RestApi {
 
   public function getPosts(WP_REST_Request $request) {
     $post_info = $this->_getPostType($request);
-    return $this->_prepareRestResponse($this->_query($post_info), 200);
+    $query_result = $this->_query($post_info);
+
+
+    // var_dump($query_result); die('111');
+    // var_dump($query_result); die;
+
+    return $query_result ? $this->_prepareRestResponse($query_result, 200) : $this->_prepareRestResponse(null, 404);
   }
 
   private function _query($post_info) {
@@ -180,12 +186,14 @@ class RestApi {
       $response = new WP_REST_Response([
         'error' => false,
         'data' => $retData,
+        'statusCode' => $code,
       ], $code);
       break;
     default:
       $response = new WP_REST_Response([
-        'error' => false,
+        'error' => true,
         'data' => $retData,
+        'statusCode' => $code,
       ], $code);
       break;
     }

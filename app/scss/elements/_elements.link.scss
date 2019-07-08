@@ -1,0 +1,15 @@
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: background-color .3s linear, color .3s linear, box-shadow .3s linear, text-shadow .3s linear, border .3s linear;
+}
+
+
+p a {
+  border-bottom: 1px solid;
+
+  &:hover {
+    border-bottom: 1px solid rgba(0,0,0,0);
+    color: #E55558;
+  }
+}

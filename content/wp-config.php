@@ -80,7 +80,7 @@ define('DISALLOW_FILE_MODS', true);
 /** Disable file editing */
 define('DISALLOW_FILE_EDIT', true);
 
-define('WP_TRANSIENTS', true);
+define('WP_TRANSIENTS', false);
 
 /**
  * For developers: WordPress debugging mode.

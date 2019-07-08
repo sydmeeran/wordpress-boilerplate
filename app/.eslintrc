@@ -1,0 +1,11 @@
+{
+  "extends": ["standard", "standard-react", "standard-jsx", "eslint:recommended", "plugin:react/recommended", "plugin:jsx-a11y/recommended"],
+  "parser": "babel-eslint",
+  "rules": {
+    "jsx-quotes": ["error", "prefer-double"],
+    "no-console": 1,
+    "no-case-declarations": 0,
+    "no-unused-vars": 1,
+    "react/no-unused-prop-types": 1
+  }
+}

@@ -1,0 +1,21 @@
+// Standardise some UI treatments.
+
+$global-radius: 3px !default;
+$global-transition: all 300ms ease-in-out !default;
+$inuit-wrapper-width: 1248px;
+
+$mq-breakpoints: (
+  mobile:  320px,
+  palm:    514px,
+  tablet:  740px,
+  desktop: 1025px,
+  wide:    1200px,
+  xwide:   1300px,
+  xxwide:  1360px
+);
+
+// widths
+$inuit-fractions: 1 2 3 4 5 12;
+
+// $font: "ITC Franklin Gothic W01", sans-serif;
+$font: "ITC Franklin Gothic LT Boo", sans-serif;

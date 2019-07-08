@@ -1,0 +1,117 @@
+html {
+  font-family: $font;
+  font-weight: normal;
+  font-style: normal;
+
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+
+  font-size: ($inuit-global-font-size / 16px) * 1em;
+  line-height: $inuit-global-line-height / $inuit-global-font-size;
+}
+
+body {
+  min-height: 100%;
+  height: 100%;
+
+  left: 0;
+  transition: left 0.3s ease, right 0.3s ease;
+
+  &.is-fixed {
+    overflow: hidden;
+    position: fixed;
+    top: 0vh;
+    left: 0;
+    width: 100%;
+
+    &.animate-offscreen {
+      transition: left 0.3s ease;
+      left: -100vw;
+    }
+  }
+}
+
+#app {
+
+}
+
+@keyframes camera {
+  0% { 
+    color: inherit;
+    text-shadow: none; 
+  }
+  50% { 
+    color: rgba(0,0,0,0);
+    text-shadow: 0 0 12px rgba(0, 0, 0, .8);  
+  }
+  100% { 
+    color: inherit;
+    text-shadow: none;
+  }
+}
+
+.skip-link{
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 14px;
+  line-height: 1.2;
+  padding: 12px 1em;
+  color: #fff;
+  width: 100%;
+  overflow: hidden;
+  outline: none;
+  text-align: center;
+  transition: all .3s linear;
+  z-index: -1;
+  font-weight: 500;
+  text-decoration: none;
+  font-weight: 500;
+  @media screen and (min-width: 560px) {
+    display: inline-block;
+    left: 50%;
+    width: auto;
+    top: 4px;
+    padding: 8px 1em;
+    transform:translateX(-50%);
+  }
+}
+.skip-link:focus,
+.skip-link.skip-link:hover {
+  width: 100%;
+  background: #E55558;
+  color: #000;
+  z-index: 1;
+  @media screen and (min-width: 560px) {
+    width: auto;
+  }
+} 
+// @media (min-width:768px){
+//   .utility-bar .skip-link{
+//     left:50%;
+//     top:0;
+//     -webkit-transform:translateX(-50%);
+//     transform:translateX(-50%)
+//     }
+//     .utility-bar .skip-link:focus{
+//       width:auto
+//       }
+//     }
+//     .utility-bar .search-link{
+//       display:block;
+//       float:right;
+//       color:#fff;
+//       text-decoration:none;
+//       font-family:CoM;
+//       font-size:1.25em;
+//       line-height:1.85em;
+//       height:1.75em;
+//       width:2em;
+//       padding:0 .5em .05em;
+//       outline:none;
+//       margin-right:.5em;
+//       overflow:hidden;
+//       text-transform:uppercase
+//   }
